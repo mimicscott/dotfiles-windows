@@ -13,7 +13,7 @@ To clone the repository, you can choose any location you prefer. I personally ke
 From PowerShell:
 
 ```pwsh
-git clone https://github.com/abrioso/dotfiles-windows.git; cd dotfiles-windows; cd setup-scripts; .\setup.ps1
+git clone https://github.com/mimicscott/dotfiles-windows.git; cd dotfiles-windows; cd setup-scripts; .\setup.ps1
 ```
 
 ### Git-free install
@@ -21,7 +21,7 @@ git clone https://github.com/abrioso/dotfiles-windows.git; cd dotfiles-windows; 
 To install these dotfiles from PowerShell without Git:
 
 ```pwsh
-iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/abrioso/dotfiles-windows/main/setup-scripts/install.ps1'))
+iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/mimicscott/dotfiles-windows/main/setup-scripts/install.ps1'))
 ```
 
 ## Use & Configuration
@@ -76,7 +76,7 @@ If you decide to fork this repository for your own custom configuration, make su
 Within `/scripts/install.ps1`, modify the Repository variables.
 
 ```pwsh
-$account = "abrioso"
+$account = "mimicscott"
 $repo    = "dotfiles-windows"
 $branch  = "main"
 ```
@@ -90,7 +90,7 @@ iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.co
 ## Feedback
 
 Suggestions/improvements are
-[welcome and encouraged](https://github.com/abrioso/dotfiles-windows/issues)!
+[welcome and encouraged](https://github.com/mimicscott/dotfiles-windows/issues)!
 
 ## Author
 

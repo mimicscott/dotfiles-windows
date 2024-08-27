@@ -1,0 +1,307 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### ASSERTIONS: System Requirements
+  ########################################
+  assertions:
+    ### Assertion: OS Version
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/OsVersion
+      id: OsVersion
+      directives:
+        description: Minimum OS version requirement
+        allowPrerelease: true
+      settings:
+        MinVersion: "10.0.22000"
+  ########################################
+  resources:
+
+    ########################################
+    ### Configuraing the basics
+    ########################################
+
+    ### Enable: Developer Mode
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      directives:
+        description: Enable Developer Mode
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+
+    ### Explorer options
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
+      directives:
+        description: Modify Windows Explorer settings
+        allowPrerelease: true
+      settings:
+        FileExtensions: Show
+        HiddenFiles: Show
+        ItemCheckBoxes: Show
+
+    ### Taskbar settings
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/Taskbar
+      directives:
+        description: Modify taskbar settings
+        allowPrerelease: true
+      settings:
+        Alignment: Left
+        HideLabelsMode: Never
+        SearchBoxMode: Hide
+        TaskViewButton: Hide
+        WidgetsButton: Hide
+
+    ### Enable Dark Mode
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
+      directives:
+        description: Enable dark mode
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+        RestartExplorer: true
+
+    ########################################
+    ### Install CLIs, SDKs & Tools
+    ########################################
+
+    ### Install Git
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: git
+      directives:
+        description: Install Git
+        allowPrerelease: true
+      settings:
+        id: Git.Git
+        source: winget
+        ensure: Present
+
+    # ### Clone dotfiles repository
+    # ### -------------------------------------
+    # - resource: GitDsc/GitClone
+    #   id: dotfiles
+    #   dependsOn:
+    #     - git
+    #   directives:
+    #     description: Clone repository
+    #     allowPrerelease: true
+    #   settings:
+    #     HttpsUrl: https://github.com/mimicscott/dotfiles-windows
+    #     RootDirectory: "$env:USERPROFILE"
+    #     Ensure: Present
+
+    ### Create Powershell Profile directory
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      id: powershellprofiledir
+      directives:
+        description: Create Powershell Profile directory
+      settings:
+        SetScript: |
+          # Get the directory of the PowerShell profile
+          $profileDirectory = Split-Path -Parent $PROFILE
+          # Ensure the directory exists
+          if (-not (Test-Path $profileDirectory)) {
+              New-Item -ItemType Directory -Path $profileDirectory | Out-Null
+          }
+        GetScript: return $false
+        TestScript: return $false
+
+    ### Create Powershell Profile
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      id: powershellprofiles
+      dependsOn:
+        - powershellprofiledir
+      directives:
+        description: Create Powershell Profile
+      settings:
+        SetScript: |
+          if (-not (Test-Path $profile)) {
+              New-Item -Path $profile -Type File | Out-Null
+          }
+        GetScript: return $false
+        TestScript: return $false
+
+    ### Install Powershell
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Powershell
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerShell
+        source: winget
+        ensure: Present
+
+    ### Install Windows Terminal
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: wterminal
+      directives:
+        description: Install Windows Terminal
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+        ensure: Present
+
+    ### Install Visual Studio Code
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vscode
+      directives:
+        description: Install Microsoft Visual Studio Code
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+        ensure: Present
+
+    ### Install Notepad++
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: npp
+      directives:
+        description: Install Notepad++
+        allowPrerelease: true
+      settings:
+        id: Notepad++.Notepad++
+        source: winget
+        ensure: Present
+
+    ### Install Visual Studio Build Tools
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: bt2022
+      directives:
+        description: Install VS Build Tools 2022
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudio.2022.BuildTools
+        ensure: Present
+
+    ### Install VS Workloads
+    ### -------------------------------------
+    - resource: Microsoft.VisualStudio.DSC/VSComponents
+      directives:
+        description: Install required VS workloads
+        allowPrerelease: true
+      dependsOn:
+        - bt2022
+      settings:
+        productId: Microsoft.VisualStudio.Product.BuildTools
+        channelId: VisualStudio.17.Release
+        components:
+          - Microsoft.VisualStudio.Workload.MSBuildTools
+          - Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools
+          - Microsoft.VisualStudio.Workload.VCTools
+        includeRecommended: true
+        includeOptional: false
+        allowUnsignedExtensions: true
+
+    ### Install Github CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: githubcli
+      directives:
+        description: Install Github CLI
+        allowPrerelease: true
+      dependsOn:
+        - Powershell
+      settings:
+        id: GitHub.cli
+        source: winget
+        ensure: Present
+
+    ### Install NuGet CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: nugetcli
+      directives:
+        description: Install NuGet CLI
+        allowPrerelease: true
+      settings:
+        id: Microsoft.NuGet
+        source: winget
+        ensure: Present
+
+    ########################################
+    ### Install gsudo
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gsudo
+      directives:
+        description: Install gsudo
+        allowPrerelease: true
+      dependsOn:
+        - Powershell
+      settings:
+        id: gerardog.gsudo
+        source: winget
+        ensure: Present
+
+    ### Install Google Chrome
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Chrome
+      directives:
+        description: Install Google Chrome
+        allowPrerelease: true
+      settings:
+        id: Google.Chrome
+        source: winget
+        ensure: Present
+
+    ### Install VirtualMachinePlatform Optional Feature
+    ### -------------------------------------
+    - resource: PSDscResources/WindowsOptionalFeature
+      id: VirtualMachinePlatform
+      directives:
+        description: VirtualMachinePlatform
+        allowPrerelease: true
+      settings:
+        Name: VirtualMachinePlatform
+        Ensure: Present
+
+    ### Install Microsoft-Windows-Subsystem-Linux Optional Feature
+    ### -------------------------------------
+    - resource: PSDscResources/WindowsOptionalFeature
+      id: Microsoft-Windows-Subsystem-Linux
+      directives:
+        description: Microsoft-Windows-Subsystem-Linux
+        allowPrerelease: true
+      settings:
+        Name: Microsoft-Windows-Subsystem-Linux
+        Ensure: Present
+
+    ### Install Windows Subsystem for Linux
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: wsl
+      dependsOn:
+        - Microsoft-Windows-Subsystem-Linux
+      directives:
+        description: WSL
+        allowPrerelease: true
+      settings:
+        id: "Microsoft.WSL"
+        source: winget  
+        ensure: Present
+
+    ### Install Ubuntu 24.04 LTS (WSL)
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      dependsOn:
+        - wsl
+      directives:
+        description: Ubuntu 24.04 LTS
+        allowPrerelease: true
+      settings:
+        id: Canonical.Ubuntu.2404
+        source: winget 
+        ensure: Present
