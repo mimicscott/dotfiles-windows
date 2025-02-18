@@ -15,7 +15,5 @@
     "SHELL": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "EDITOR": "notepad.exe",
     "GIT_SSH": "C:\\Program Files\\Git\\usr\\bin\\ssh.exe",
-    "VSCODE": "C:\\Program Files\\Microsoft VS Code\\Code.exe",
-    "NODE_PATH": "C:\\Program Files\\nodejs",
-    "PYTHONPATH": "C:\\Python39"
+    "VSCODE": "C:\\Program Files\\Microsoft VS Code\\Code.exe"
 }
