@@ -16,38 +16,37 @@ properties:
         MinVersion: "10.0.22000"
   ########################################
   resources:
+  
     ########################################
-    ### Install Internet Browser Packages
+    ### Install Packages for Terminal 
+    ### Customization: 
     ########################################
-    ### Install Microsoft Edge
+    ### Install Windows Terminal
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: edge
+      id: wterminal
       directives:
-        description: Install Microsoft Edge
+        description: Install Windows Terminal
         allowPrerelease: true
       settings:
-        id: Microsoft.Edge
+        id: Microsoft.WindowsTerminal
         source: winget
-    ########################################
-    ### Install Google Chrome
+    ### Install Powershell
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Chrome
       directives:
-        description: Install Google Chrome
+        description: Install Powershell
         allowPrerelease: true
       settings:
-        id: Google.Chrome
+        id: Microsoft.PowerShell
         source: winget
-    ########################################
-    ### Install Mozilla Firefox
+    ### Install Oh My Posh
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Firefox
-      directives:
-        description: Install Mozilla Firefox
-        allowPrerelease: true
-      settings:
-        id: Mozilla.Firefox
-        source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: OMP
+    #   directives:
+    #     description: Install Oh My Posh
+    #     allowPrerelease: true
+    #   settings:
+    #     id: JanDeDobbeleer.OhMyPosh
+    #     source: winget

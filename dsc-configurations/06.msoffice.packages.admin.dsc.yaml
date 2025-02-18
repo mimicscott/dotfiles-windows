@@ -20,63 +20,53 @@ properties:
     ########################################
     ### Install Office Packages
     ########################################
-    ### Install VideoLAN VLC Media Player
+    ### Install Edge
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: vlc
+      id: edge
       directives:
-        description: Install VideoLAN VLC Media Player
+        description: Install Edge
         allowPrerelease: true
       settings:
-        id: VideoLAN.VLC
+        id: Microsoft.Edge
         source: winget
-    ### Install OBS Studio
+    ### Install Microsoft Office 365
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: obs
+      id: office
       directives:
-        description: Install OBS Studio
+        description: Install Microsoft Office 365
         allowPrerelease: true
       settings:
-        id: OBSProject.OBSStudio
+        id: Microsoft.Office
         source: winget
-    ### Install Audacity
+    ### Install Microsoft Teams
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: audacity
+      id: teams
       directives:
-        description: Install Audacity
+        description: Install Microsoft Teams
         allowPrerelease: true
       settings:
-        id: Audacity.Audacity
+        id: Microsoft.Teams
         source: winget
-    ### Install HandBrake
+    ### Install Microsoft OneDrive
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: handbrake
+      id: onedrive
       directives:
-        description: Install HandBrake
+        description: Install Microsoft OneDrive
         allowPrerelease: true
       settings:
-        id: HandBrake.HandBrake
+        id: Microsoft.OneDrive
         source: winget
-    ### Install GIMP
+    ### Install Microsoft Power BI
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: gimp
-      directives:
-        description: Install GIMP
-        allowPrerelease: true
-      settings:
-        id: GIMP.GIMP
-        source: winget
-    ### Install Inkscape
-    ### ------------------------------------- 
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: inkscape
-      directives:
-        description: Install Inkscape
-        allowPrerelease: true
-      settings:
-        id: Inkscape.Inkscape
-        source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: powerbi
+    #   directives:
+    #     description: Install Microsoft Power BI
+    #     allowPrerelease: true
+    #   settings:
+    #     id: Microsoft.PowerBI
+    #     source: winget

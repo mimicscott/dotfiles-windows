@@ -101,68 +101,68 @@ properties:
         ensure: Present
     ### Install Python
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: python
-      directives:
-        description: Install Python
-        allowPrerelease: true
-      settings:
-        id: Python.Python.3.13
-        source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: python
+    #   directives:
+    #     description: Install Python
+    #     allowPrerelease: true
+    #   settings:
+    #     id: Python.Python.3.13
+    #     source: winget
     
     ########################################
     ### Install Other Developer Tools
     ########################################
     ### Install DevHome
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: DevHome
-      directives:
-        description: Install DevHome
-        allowPrerelease: true
-      settings:
-        id: Microsoft.DevHome
-        source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: DevHome
+    #   directives:
+    #     description: Install DevHome
+    #     allowPrerelease: true
+    #   settings:
+    #     id: Microsoft.DevHome
+    #     source: winget
     ### Install DevHome Azure Extension
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      dependsOn:
-        - DevHome
-      directives:
-        description: Install DevHome Azure Extension
-        allowPrerelease: true
-      settings:
-        id: 9MV8F79FGXTR
-        source: msstore
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   dependsOn:
+    #     - DevHome
+    #   directives:
+    #     description: Install DevHome Azure Extension
+    #     allowPrerelease: true
+    #   settings:
+    #     id: 9MV8F79FGXTR
+    #     source: msstore
     ### Install DevHome GitHub Extension
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      dependsOn:
-        - DevHome
-      directives:
-        description: Install DevHome GitHub Extension
-        allowPrerelease: true
-      settings:
-        id: 9NZCC27PR6N6
-        source: msstore
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   dependsOn:
+    #     - DevHome
+    #   directives:
+    #     description: Install DevHome GitHub Extension
+    #     allowPrerelease: true
+    #   settings:
+    #     id: 9NZCC27PR6N6
+    #     source: msstore
     ### Install Azure CLI
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: azurecli
-      directives:
-        description: Install Azure CLI
-        allowPrerelease: true
-      settings:
-       id:  Microsoft.AzureCLI
-       source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: azurecli
+    #   directives:
+    #     description: Install Azure CLI
+    #     allowPrerelease: true
+    #   settings:
+    #    id:  Microsoft.AzureCLI
+    #    source: winget
     ### Install Azd
     ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      directives:
-        description: Install Azd
-        allowPrerelease: true
-      settings:
-        id: Microsoft.Azd
-        source: winget
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   directives:
+    #     description: Install Azd
+    #     allowPrerelease: true
+    #   settings:
+    #     id: Microsoft.Azd
+    #     source: winget
         
 #######################################

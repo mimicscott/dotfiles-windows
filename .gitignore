@@ -5,4 +5,4 @@
 
 #Exclude all the logs
 logs/*.txt
-
+dsc-unused/
