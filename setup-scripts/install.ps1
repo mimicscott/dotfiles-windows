@@ -9,12 +9,12 @@
 #  
 # The installer script can be run from a PowerShell terminal by executing the following command:
 # 
-#   iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/abrioso/dotfiles-windows/main/setup-scripts/install.ps1'))
+#   iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mimicscott/dotfiles-windows/main/setup-scripts/install.ps1'))
 # 
 
 $ErrorActionPreference = "Stop"
 
-$account = "abrioso"
+$account = "mimicscott"
 $repo    = "dotfiles-windows"
 $branch  = "main"
 

@@ -5,6 +5,7 @@ Dotfiles for Windows inspired from several other dotfiles.
 ## Installation
 
 > **Note:** To make this work, you need to set your execution policy to unrestricted (or at least bypass) by running `Set-ExecutionPolicy Unrestricted -Scope CurrentUser` from a PowerShell.
+#> **Note:** To make this work, you need to set your execution policy to unrestricted (or at least bypass) by running `Set-ExecutionPolicy Unrestricted` from a PowerShell running as Administrator.
 
 ### Using Git and the bootstrap script
 
@@ -13,7 +14,8 @@ To clone the repository, you can choose any location you prefer. I personally ke
 From PowerShell:
 
 ```pwsh
-git clone https://github.com/abrioso/dotfiles-windows.git; cd dotfiles-windows; .\setup-scripts\setup.ps1
+git clone https://github.com/mimicscott/dotfiles-windows.git; cd dotfiles-windows; .\setup-scripts\setup.ps1
+# git clone https://github.com/mimicscott/dotfiles-windows.git; cd dotfiles-windows; cd setup-scripts; .\setup.ps1
 ```
 
 ### Git-free install
@@ -21,7 +23,7 @@ git clone https://github.com/abrioso/dotfiles-windows.git; cd dotfiles-windows; 
 To install these dotfiles from PowerShell without Git:
 
 ```pwsh
-iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/abrioso/dotfiles-windows/main/setup-scripts/install.ps1'))
+iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/mimicscott/dotfiles-windows/main/setup-scripts/install.ps1'))
 ```
 
 ## Use & Configuration
@@ -42,6 +44,7 @@ The folder "dsc-configurations" contains the DSC configuration files:
 
 - `.\dsc-configuration\0.base.configurations.yaml` : Base and must-have configuration.
 - `.\dsc-configuration\1.hyperv.wsl.configurations.yaml` : HyperV and WSL configuration.
+#- `.\dsc-configuration\base-configurations.yaml` : Base and must-have configuration.
 
 ### PowerShell Profile
 
@@ -87,7 +90,7 @@ If you decide to fork this repository for your own custom configuration, make su
 Within `/scripts/install.ps1`, modify the Repository variables.
 
 ```pwsh
-$account = "abrioso"
+$account = "mimicscott"
 $repo    = "dotfiles-windows"
 $branch  = "main"
 ```
@@ -101,7 +104,7 @@ iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.co
 ## Feedback
 
 Suggestions/improvements are
-[welcome and encouraged](https://github.com/abrioso/dotfiles-windows/issues)!
+[welcome and encouraged](https://github.com/mimicscott/dotfiles-windows/issues)!
 
 ## Author
 
