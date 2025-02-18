@@ -58,7 +58,7 @@ properties:
         description: Clone WinGet CLI GitHub repository
         allowPrerelease: true
       settings:
-        HttpsUrl: https://github.com/abrioso/dotfiles-windows
+        HttpsUrl: https://github.com/mimicscott/dotfiles-windows
         RootDirectory: z:\workspaces
         Ensure: Present
     ### Enable: Developer Mode

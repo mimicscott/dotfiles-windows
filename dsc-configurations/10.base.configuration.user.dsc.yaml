@@ -55,7 +55,7 @@ properties:
     #    description: Clone my dotfiles GitHub repository
     #    allowPrerelease: true
     #  settings:
-    #    HttpsUrl: https://github.com/abrioso/dotfiles-windows
+    #    HttpsUrl: https://github.com/mimicscott/dotfiles-windows
     #    RootDirectory: $env:USERPROFILE\workspace
     #    Ensure: Present
     ### Enable: Developer Mode
